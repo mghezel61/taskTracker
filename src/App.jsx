@@ -57,17 +57,10 @@ function App() {
   // Toggle the Add Component
   const toggleAddComponen = (e) => {
     setShowAddTask(!showAddTask);
-    e.target.style.backgroundColor === "green"
-      ? (e.target.style.backgroundColor = "red")
-      : (e.target.style.backgroundColor = "green");
-
-    e.target.textContent === "Hide"
-      ? (e.target.textContent = "Show")
-      : (e.target.textContent = "Hide");
   };
   return (
     <div className="container">
-      <Header onClick={toggleAddComponen} />
+      <Header onClick={toggleAddComponen} showAdd={showAddTask} />
       {showAddTask && <AddTask addTask={addTask} />}
       {tasks.length > 0 ? (
         <TasksList
