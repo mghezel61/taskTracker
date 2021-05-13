@@ -38,24 +38,33 @@ function App() {
   };
 
   // Toggle reminder
-  const toggleReminder = (id)=> {
+  const toggleReminder = (id) => {
     setTasks(
-      tasks.map((task) => task.id === id ? {...task, reminder:!task.reminder} : task)
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
     );
-    tasks.map((task)=>task.id === id ? console.log(task.reminder): "");
-  } 
+  };
 
   // Add new Task
-  const addTask = (e)=> {
-    // e.preventDefault;
-    console.log(e);
-  }
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 1000) + 1;
+    const newTask = { id, ...task };
+    console.log(newTask);
+    console.log(tasks);
+    setTasks([...tasks, newTask]);
+    console.log(tasks);
+  };
   return (
     <div className="container">
       <Header />
-      <AddTask addTask = {addTask} />
+      <AddTask addTask={addTask} />
       {tasks.length > 0 ? (
-        <TasksList tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+        <TasksList
+          tasks={tasks}
+          onDelete={deleteTask}
+          onToggle={toggleReminder}
+        />
       ) : (
         "There is no task to show"
       )}

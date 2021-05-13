@@ -1,5 +1,20 @@
-const Input = ({ type, value, placeholder, id, cursor }) => {
-    // this.state = {value:''}
+const Input = ({ type, value, placeholder, id, cursor, onChange, checked }) => {
+  // this.state = {value:''}
+  if (type === "checkbox") {
+    return (
+      <>
+        <input
+          type={type}
+          checked = {checked}
+          value={value}
+          placeholder={placeholder}
+          id={id}
+          style={{ cursor } && { cursor: cursor }}
+          onChange={onChange}
+        />
+      </>
+    );
+  }
   return (
     <>
       <input
@@ -7,8 +22,8 @@ const Input = ({ type, value, placeholder, id, cursor }) => {
         value={value}
         placeholder={placeholder}
         id={id}
-        style={{cursor} && {cursor:cursor}}
-        // style={{cursor ? cursor:"pointer" : }}
+        style={{ cursor } && { cursor: cursor }}
+        onChange={onChange}
       />
     </>
   );
