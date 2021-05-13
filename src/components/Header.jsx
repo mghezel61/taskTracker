@@ -1,12 +1,11 @@
 import Button from "./Button";
 
-const Header = () => {
-  const onClick = (e) => console.log(e.target);
+const Header = ({ onClick }) => {
   return (
     <>
       <header className="header">
         <h1>task Tracker</h1>
-        <Button title="Add" color="white" bgColor="Green" onClick={onClick} />
+        <Button title="Hide" color="white" bgColor="red" onClick={onClick} />
       </header>
     </>
   );

@@ -5,6 +5,7 @@ import AddTask from "./components/AddTask";
 import TasksList from "./components/TasksList";
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(true);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -50,15 +51,24 @@ function App() {
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...task };
-    console.log(newTask);
-    console.log(tasks);
     setTasks([...tasks, newTask]);
-    console.log(tasks);
+  };
+
+  // Toggle the Add Component
+  const toggleAddComponen = (e) => {
+    setShowAddTask(!showAddTask);
+    e.target.style.backgroundColor === "green"
+      ? (e.target.style.backgroundColor = "red")
+      : (e.target.style.backgroundColor = "green");
+
+    e.target.textContent === "Hide"
+      ? (e.target.textContent = "Show")
+      : (e.target.textContent = "Hide");
   };
   return (
     <div className="container">
-      <Header />
-      <AddTask addTask={addTask} />
+      <Header onClick={toggleAddComponen} />
+      {showAddTask && <AddTask addTask={addTask} />}
       {tasks.length > 0 ? (
         <TasksList
           tasks={tasks}
