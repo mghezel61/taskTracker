@@ -1,0 +1,40 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Doctor Appointment",
+      "day": "5th Feb at 8:40",
+      "reminder": false
+    },
+    {
+      "id": 4,
+      "title": "Meeting",
+      "day": "23th Feb at 14:30",
+      "reminder": true
+    },
+    {
+      "title": "going party",
+      "day": "2021-05-15",
+      "reminder": true,
+      "id": 5
+    },
+    {
+      "title": "quiz",
+      "day": "2021-05-15",
+      "reminder": true,
+      "id": 6
+    },
+    {
+      "title": "doctor appointment",
+      "day": "2021-05-22",
+      "reminder": true,
+      "id": 7
+    },
+    {
+      "title": "learing react",
+      "day": "2021-05-15",
+      "reminder": true,
+      "id": 8
+    }
+  ]
+}

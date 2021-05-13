@@ -1,40 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import "./App.css";
 import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import TasksList from "./components/TasksList";
 
 function App() {
+  // toggle add filed
   const [showAddTask, setShowAddTask] = useState(true);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Doctor Appointment",
-      day: "5th Feb at 8:40",
-      reminder: false,
-    },
-    {
-      id: 2,
-      title: "finishing the react task",
-      day: "3th Jan at 23:40",
-      reminder: true,
-    },
-    {
-      id: 3,
-      title: "Shopping",
-      day: "10th Feb at 7:30",
-      reminder: true,
-    },
-    {
-      id: 4,
-      title: "Meeting",
-      day: "23th Feb at 14:30",
-      reminder: true,
-    },
-  ]);
+  // fetch data from DB
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    const getTasks = async () => {
+      const taskFromServer = await fetchTasks();
+      setTasks(taskFromServer);
+    };
+    getTasks();
+  }, []);
 
+  // Fetch tasks from database
+  const fetchTasks = async () => {
+    const res = await fetch("http://localhost:5000/tasks");
+    const fetchedTasks = await res.json();
+    return fetchedTasks;
+  };
   //Delete Task
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
@@ -48,10 +42,21 @@ function App() {
   };
 
   // Add new Task
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 1000) + 1;
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
+  const addTask = async (task) => {
+    const res =  await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers : {
+        "Content-Type" : "application/json"
+      },
+      body : JSON.stringify(task)
+    });
+    const data = await res.json(res);
+    setTasks([...tasks, data]);
+    // const tasksFromServer = res.json();
+    // setTasks(...tasksFromServer, ...task);
+    // const id = Math.floor(Math.random() * 1000) + 1;
+    // const newTask = { id, ...task };
+    // setTasks([...tasks, task]);
   };
 
   // Toggle the Add Component
