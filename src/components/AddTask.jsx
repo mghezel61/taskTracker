@@ -2,27 +2,25 @@ import Button from "./Button";
 import Input from "./Input";
 import { useState } from "react";
 
-
 const AddTask = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [day, setDay] = useState("");
   const [reminder, setReminder] = useState(false);
 
-
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(!title || !day) {
-      alert("Please fill in the blanks")
+    if (!title || !day) {
+      alert("Please fill in the blanks");
       return;
-    } 
+    }
 
-    addTask({title, day, reminder})
+    addTask({ title, day, reminder });
     setTitle("");
     setDay("");
     setReminder(false);
     // !day && alert('Please enter your day');
-  }
+  };
   return (
     <form className="form-control" onSubmit={onSubmit}>
       <div className="form-control">
@@ -35,11 +33,7 @@ const AddTask = ({ addTask }) => {
         />
       </div>
       <div className="form-control">
-        <label
-          htmlFor="dateAndtime"
-        >
-          Date and Time
-        </label>
+        <label htmlFor="dateAndtime">Date and Time</label>
         <Input
           type="Date"
           id="dateAndtime"

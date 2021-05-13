@@ -24,31 +24,41 @@ function App() {
     const fetchedTasks = await res.json();
     return fetchedTasks;
   };
-  //Delete Task
-  const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "DELETE",
-    });
-    setTasks(tasks.filter((task) => task.id !== id));
+
+  // Fetch a task from database
+  const fetchTask = async (id) => {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const fetchedTasks = await res.json();
+    return fetchedTasks;
   };
 
   // Toggle reminder
-  const toggleReminder = (id) => {
+  const toggleReminder = async (id) => {
+    let task = await fetchTask(id);
+    const updatedTask = { ...task, reminder: !task.reminder };
+    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    });
+    const data = await response.json();
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
+        task.id === id ? { ...task, reminder: data.reminder } : task
       )
     );
   };
 
   // Add new Task
   const addTask = async (task) => {
-    const res =  await fetch("http://localhost:5000/tasks", {
+    const res = await fetch("http://localhost:5000/tasks", {
       method: "POST",
-      headers : {
-        "Content-Type" : "application/json"
+      headers: {
+        "Content-Type": "application/json",
       },
-      body : JSON.stringify(task)
+      body: JSON.stringify(task),
     });
     const data = await res.json(res);
     setTasks([...tasks, data]);
@@ -57,6 +67,14 @@ function App() {
     // const id = Math.floor(Math.random() * 1000) + 1;
     // const newTask = { id, ...task };
     // setTasks([...tasks, task]);
+  };
+
+  //Delete Task
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   // Toggle the Add Component
