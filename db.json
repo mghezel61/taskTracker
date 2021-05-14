@@ -1,30 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Doctor Appointment",
-      "day": "5th Feb at 8:40",
-      "reminder": true
-    },
-    {
-      "id": 4,
-      "title": "Meeting",
-      "day": "23th Feb at 14:30",
-      "reminder": false
-    },
-    {
-      "title": "going party",
-      "day": "2021-05-15",
-      "reminder": true,
-      "id": 5
-    },
-    {
-      "title": "quiz",
-      "day": "2021-05-15",
-      "reminder": false,
-      "id": 6
-    },
-    {
       "title": "doctor appointment",
       "day": "2021-05-22",
       "reminder": true,
@@ -35,6 +11,12 @@
       "day": "2021-05-15",
       "reminder": true,
       "id": 8
+    },
+    {
+      "title": "going party",
+      "day": "2021-05-27",
+      "reminder": true,
+      "id": 9
     }
   ]
 }
